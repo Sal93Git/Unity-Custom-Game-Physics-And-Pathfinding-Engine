@@ -4,20 +4,22 @@ using UnityEngine;
 
 public class TileNode : MonoBehaviour
 {
-    public GridMapGenerator test2;
-    public List<TileNode> test;
+    public GridMapGenerator gridMapGenerator;
+    public List<TileNode> neighbourNodes;
     public TileType type;
     SpriteRenderer spriteRenderer;
 
     public int rowIndex;
     public int colIndex;
+
+    public int tileWeight;
     // Start is called before the first frame update
     void Start()
     {
-        test2 = GameObject.FindObjectOfType<GridMapGenerator>();
+        gridMapGenerator = GameObject.FindObjectOfType<GridMapGenerator>();
 
-        test = new List<TileNode>();
-        test = GetNeighbours(test2.grid);
+        neighbourNodes = new List<TileNode>();
+        neighbourNodes = GetNeighbours(gridMapGenerator.grid);
 
         spriteRenderer = GetComponent<SpriteRenderer>();
         if(type == TileType.Open)
@@ -50,7 +52,7 @@ public class TileNode : MonoBehaviour
 
     public List<TileNode> GetNeighbours_()
     {
-        return test;
+        return neighbourNodes;
     }
     public List<TileNode> GetNeighbours(TileNode[,] tileMap)
     {
@@ -85,7 +87,7 @@ public class TileNode : MonoBehaviour
             }
         }
 
-         if(rowIndex > 0)
+        if(rowIndex > 0)
         {
             TileNode botTile = tileMap[rowIndex - 1 , colIndex];
             if (botTile.type != TileType.Obstacle)
@@ -94,6 +96,47 @@ public class TileNode : MonoBehaviour
             }
         }
 
+        //-----------------------------------------
+        // Check top-left neighbour
+        if (rowIndex < numRows - 1 && colIndex > 0)
+        {
+            TileNode topLeftTile = tileMap[rowIndex + 1, colIndex - 1];
+            if (topLeftTile.type != TileType.Obstacle)
+            {
+                neighbours.Add(topLeftTile);
+            }
+        }
+
+        // Check top-right neighbour
+        if (rowIndex < numRows - 1 && colIndex < numCols - 1)
+        {
+            TileNode topRightTile = tileMap[rowIndex + 1, colIndex + 1];
+            if (topRightTile.type != TileType.Obstacle)
+            {
+                neighbours.Add(topRightTile);
+            }
+        }
+
+        // Check bottom-left neighbour
+        if (rowIndex > 0 && colIndex > 0)
+        {
+            TileNode bottomLeftTile = tileMap[rowIndex - 1, colIndex - 1];
+            if (bottomLeftTile.type != TileType.Obstacle)
+            {
+                neighbours.Add(bottomLeftTile);
+            }
+        }
+
+        // Check bottom-right neighbour
+        if (rowIndex > 0 && colIndex < numCols - 1)
+        {
+            TileNode bottomRightTile = tileMap[rowIndex - 1, colIndex + 1];
+            if (bottomRightTile.type != TileType.Obstacle)
+            {
+                neighbours.Add(bottomRightTile);
+            }
+        }
+        //-----------------------------------------
         return neighbours;
     }
 
