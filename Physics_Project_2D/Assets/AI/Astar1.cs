@@ -45,11 +45,13 @@ public class Astar1 : MonoBehaviour
 
             foreach (TileNode neighbourTile in currentTile.GetNeighbours(grid))
             {
-                // This is something you will need to change if you have tiles of varying cost that aren't always 1
-                // IMPORTANT
-                float tentativeGCost = gCost[currentTile] + 1;
+                // Tile nodes all have a self contained weight value which we can retrieve and use in our calculations to decide which neighbouring tile to go to next
+                // Lower tile node value will indicate a cheaper path, 0 has been reserved for unpassable objects
+                int neighbourTileWeight = neighbourTile.GetTileWeight();
+                // float tentativeGCost = gCost[currentTile] + 1;
+                float tentativeGCost = gCost[currentTile] + neighbourTileWeight;
 
-                // If neighbouring tile is not in the gCost library or lower, then visit
+                // If the neighboring tile hasn't been visited or if the new path is cheaper, update its info and add it for further exploration.
                 if (!gCost.ContainsKey(neighbourTile) || tentativeGCost < gCost[neighbourTile])
                 {
                     previousTileMap[neighbourTile] = currentTile;
@@ -86,7 +88,7 @@ public class Astar1 : MonoBehaviour
 
     private static float HCost(TileNode currentTile, TileNode goalTile)
     {
-        // Manhattan distance
+        // Using manhattan distance
         return Mathf.Abs(currentTile.GetColIndex() - goalTile.GetColIndex()) + Mathf.Abs(currentTile.GetRowIndex() - goalTile.GetRowIndex());
     }
 }

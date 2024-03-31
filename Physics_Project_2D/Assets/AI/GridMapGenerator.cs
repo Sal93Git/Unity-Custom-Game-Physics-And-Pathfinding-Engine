@@ -55,7 +55,7 @@ public class GridMapGenerator : MonoBehaviour
     [Header("PathFinding TESTING ")]
     public TileNode starter;
     public TileNode ender;
-    public Astar1 pathFinder2;
+    //public Astar1 pathFinder2;
    // public DijkstrasPathfinding pathFinder;
 
     [Header("Generate CSV Files")]
@@ -147,7 +147,7 @@ public class GridMapGenerator : MonoBehaviour
     void Awake()
     {
        // pathFinder = GameObject.FindObjectOfType<DijkstrasPathfinding>();
-        pathFinder2 = GameObject.FindObjectOfType<Astar1>();
+       //pathFinder2 = GameObject.FindObjectOfType<Astar1>();
         csvFileToUse = generatedCSVFiles[csvFilesListIndex];
         LoadCSV();
     }
@@ -155,20 +155,20 @@ public class GridMapGenerator : MonoBehaviour
     // Currently being used to test pathfinding , should be cleared later
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && pathFinder2 != null) // Ensure pathFinder is not null
-        {
-            List<TileNode> path = new List<TileNode>();
-            path = pathFinder2.FindShortestPath(grid,starter,ender);
-            foreach (TileNode node in path)
-            {
-                SpriteRenderer spriteRenderer = node.gameObject.GetComponent<SpriteRenderer>();
-                // Ensure the spriteRenderer is not null before attempting to change its color
-                if (spriteRenderer != null)
-                {
-                    spriteRenderer.color = Color.black;
-                }
-            }
-        }
+        // if (Input.GetKeyDown(KeyCode.Space) && pathFinder2 != null) // Ensure pathFinder is not null
+        // {
+        //     List<TileNode> path = new List<TileNode>();
+        //     path = pathFinder2.FindShortestPath(grid,starter,ender);
+        //     foreach (TileNode node in path)
+        //     {
+        //         SpriteRenderer spriteRenderer = node.gameObject.GetComponent<SpriteRenderer>();
+        //         // Ensure the spriteRenderer is not null before attempting to change its color
+        //         if (spriteRenderer != null)
+        //         {
+        //             spriteRenderer.color = Color.black;
+        //         }
+        //     }
+        // }
     }
 
     private void LoadCSV()

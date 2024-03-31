@@ -25,18 +25,22 @@ public class TileNode : MonoBehaviour
         if(type == TileType.Open)
         {
             spriteRenderer.color = Color.white;
+            tileWeight = 1;
         }
         if(type == TileType.Obstacle)
         {
             spriteRenderer.color = Color.blue;
+            tileWeight = 0;
         }
         if(type == TileType.Goal)
         {
             spriteRenderer.color = Color.green;
+            tileWeight = 2;
         }
         if(type == TileType.Start)
         {
             spriteRenderer.color = Color.red;
+            tileWeight = 3;
         }
     }
 
@@ -48,6 +52,16 @@ public class TileNode : MonoBehaviour
     public int GetColIndex()
     {
         return colIndex;
+    }
+
+    public int GetTileWeight()
+    {
+        return tileWeight;
+    }
+
+    public void SetTileWeight(int _tileWeight)
+    {
+        tileWeight = _tileWeight;
     }
 
     public List<TileNode> GetNeighbours_()
