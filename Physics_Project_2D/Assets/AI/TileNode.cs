@@ -18,10 +18,33 @@ public class TileNode : MonoBehaviour
     {
         gridMapGenerator = GameObject.FindObjectOfType<GridMapGenerator>();
 
+        // Information about neighbour tiles are collected on start and stored on this
         neighbourNodes = new List<TileNode>();
         neighbourNodes = GetNeighbours(gridMapGenerator.grid);
 
         spriteRenderer = GetComponent<SpriteRenderer>();
+
+        // if(type == TileType.Open)
+        // {
+        //     spriteRenderer.color = Color.white;
+        //     tileWeight = 1;
+        // }
+        // if(type == TileType.Obstacle)
+        // {
+        //     spriteRenderer.color = Color.blue;
+        //     tileWeight = 0;
+        // }
+        // if(type == TileType.Goal)
+        // {
+        //     spriteRenderer.color = Color.green;
+        //     tileWeight = 2;
+        // }
+        // if(type == TileType.Start)
+        // {
+        //     spriteRenderer.color = Color.red;
+        //     tileWeight = 3;
+        // }
+
         if(type == TileType.Open)
         {
             spriteRenderer.color = Color.white;
@@ -32,7 +55,7 @@ public class TileNode : MonoBehaviour
             spriteRenderer.color = Color.blue;
             tileWeight = 0;
         }
-        if(type == TileType.Goal)
+        if(type == TileType.TallGrass)
         {
             spriteRenderer.color = Color.green;
             tileWeight = 2;
@@ -40,7 +63,12 @@ public class TileNode : MonoBehaviour
         if(type == TileType.Start)
         {
             spriteRenderer.color = Color.red;
-            tileWeight = 3;
+            tileWeight = 1;
+        }
+        if(type == TileType.Goal)
+        {
+            spriteRenderer.color = Color.black;
+            tileWeight = 1;
         }
     }
 
@@ -68,6 +96,8 @@ public class TileNode : MonoBehaviour
     {
         return neighbourNodes;
     }
+
+    // The GetNeighbours function has been amended to take into account all surrounding traversable tiles including diagonal tiles.
     public List<TileNode> GetNeighbours(TileNode[,] tileMap)
     {
         List<TileNode> neighbours = new List<TileNode>();
@@ -162,6 +192,7 @@ public enum TileType
 {
     Open,
     Obstacle,
+    TallGrass,
     Goal,
     Start,
 }

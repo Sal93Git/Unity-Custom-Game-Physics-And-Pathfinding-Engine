@@ -29,7 +29,19 @@ public class AiStateMachineAgent : MonoBehaviour
         currentState = AgentState.Idle;
         astar1 = gameObject.GetComponent<Astar1>();
         gridGen = GameObject.FindObjectOfType<GridMapGenerator>();
-        //TileNode x = calculateNearestTile();
+
+        List<TileNode> tiles = gridGen.getGridNodes();
+        foreach(TileNode tile in tiles)
+        {
+            if(tile.type == TileType.Start)
+            {
+                gameObject.transform.position = tile.transform.position;
+            }
+            if(tile.type == TileType.Goal)
+            {
+                target = tile;
+            }
+        }
     }
 
     // Update is called once per frame
@@ -56,7 +68,7 @@ public class AiStateMachineAgent : MonoBehaviour
         path = astar1.FindShortestPath(gridGen.grid,starterTile, _target);
         foreach(TileNode tile in path)
         {
-            while (Vector3.Distance(transform.position, tile.gameObject.transform.position) > 0.5f)
+            while (Vector3.Distance(transform.position, tile.gameObject.transform.position) > 0.15f)
             {
                 // Calculate the direction vector towards the target
                 Vector3 direction = (tile.gameObject.transform.position - transform.position).normalized;

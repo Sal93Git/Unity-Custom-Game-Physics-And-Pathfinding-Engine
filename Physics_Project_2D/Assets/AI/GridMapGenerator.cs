@@ -41,7 +41,7 @@ public class GridMapGenerator : MonoBehaviour
     [Header("grid generation variables")]
     public GameObject tilePrefab;
     private float tileSize = 1.0f;
-    private float padding = 0.1f;
+    private float padding = 0f;
     public int gridSize = 10;
     TileType[,] tileMap;
 
@@ -190,6 +190,9 @@ public class GridMapGenerator : MonoBehaviour
         _numberOfRows = numRows;
         _numberOfColumns = numCols;
 
+        bool startTileGenerated = false;
+        bool endTileGenerated = false;
+
         tileMap = new TileType[numRows,numCols];
         for(int i = 0; i < numRows; i++)
         {
@@ -199,17 +202,39 @@ public class GridMapGenerator : MonoBehaviour
                 switch(int.Parse(values[j].Trim()))
                 {
                     case 0:
-                        tileMap[i,j] = TileType.Open;
-                        break;
+                        if(!startTileGenerated)
+                        {
+                            tileMap[i,j] = TileType.Start;
+                            startTileGenerated = true;
+                            break;
+                        }
+                        if((i > numRows-2) && (j > numCols -5) && !endTileGenerated)
+                        {
+                            tileMap[i,j] = TileType.Goal;
+                            endTileGenerated=true;
+                            break;
+                        }
+                        else 
+                        {
+                            tileMap[i,j] = TileType.Open;
+                            break;
+                        }
+                
                     case 1:
-                        tileMap[i,j] = TileType.Goal;
+                        if((i > numRows-2) && (j > numCols -5) && !endTileGenerated)
+                        {
+                            tileMap[i,j] = TileType.Goal;
+                            endTileGenerated=true;
+                            break;
+                        }
+                        tileMap[i,j] = TileType.TallGrass;
                         break;
                     case 2:
                         tileMap[i,j] = TileType.Obstacle;
                         break;
-                    case 3:
-                        tileMap[i,j] = TileType.Start;
-                        break;
+                    // case 3:
+                    //     tileMap[i,j] = TileType.Start;
+                    //     break;
                 }
             }
         }
