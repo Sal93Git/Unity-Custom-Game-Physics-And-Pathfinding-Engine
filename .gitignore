@@ -77,9 +77,9 @@ sysinfo.txt
 *.unitypackage
 
 # Ignore files with .shader and .cginc extensions and prevent Linguist from detecting them as code
-*.shaders linguist-vendored=true
-*.shader linguist-vendored=true
-*.cginc linguist-vendored=true
+**/shaders/* linguist-vendored=true
+**/shader/* linguist-vendored=true
+**/cginc/* linguist-vendored=true
 
 # Crashlytics generated file
 crashlytics-build.properties
