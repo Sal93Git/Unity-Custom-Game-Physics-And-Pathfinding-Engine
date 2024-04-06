@@ -2,6 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+public enum TileType
+{
+    Open,
+    Obstacle,
+    TallGrass,
+    Goal,
+    Start,
+}
+
+
 public class TileNode : MonoBehaviour
 {
     public GridMapGenerator gridMapGenerator;
@@ -188,11 +199,4 @@ public class TileNode : MonoBehaviour
 }
 
 
-public enum TileType
-{
-    Open,
-    Obstacle,
-    TallGrass,
-    Goal,
-    Start,
-}
+

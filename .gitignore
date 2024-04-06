@@ -76,5 +76,9 @@ sysinfo.txt
 *.apk
 *.unitypackage
 
+# Ignore files with .shader and .cginc extensions and prevent Linguist from detecting them as code
+*.shader linguist-detectable=false
+*.cginc linguist-detectable=false
+
 # Crashlytics generated file
 crashlytics-build.properties

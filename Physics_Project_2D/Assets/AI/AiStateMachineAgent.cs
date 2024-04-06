@@ -104,7 +104,7 @@ public class AiStateMachineAgent : MonoBehaviour
         if(tileReferenceHolder != null)
         {
             SpriteRenderer spriteRenderer = tileReferenceHolder.gameObject.GetComponent<SpriteRenderer>();
-            spriteRenderer.color = Color.black;
+            spriteRenderer.color = Color.white;
         }
         return tileReferenceHolder;
     }
