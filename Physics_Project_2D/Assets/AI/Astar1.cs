@@ -4,25 +4,25 @@ using UnityEngine;
 
 public class Astar1 : MonoBehaviour
 {
-    Dictionary<TileNode, float> gCost = new Dictionary<TileNode, float>();
-    Dictionary<TileNode, float> fCost = new Dictionary<TileNode, float>();
-    List<TileNode> openSet = new List<TileNode>(); 
-    Dictionary<TileNode, TileNode> previousTileMap = new Dictionary<TileNode, TileNode>();
+    // Dictionary<TileNode, float> gCost = new Dictionary<TileNode, float>();
+    // Dictionary<TileNode, float> fCost = new Dictionary<TileNode, float>();
+    // List<TileNode> openSet = new List<TileNode>(); 
+    // Dictionary<TileNode, TileNode> previousTileMap = new Dictionary<TileNode, TileNode>();
 
     public List<TileNode> FindShortestPath(TileNode[,] grid, TileNode startTile, TileNode goalTile)
     {
-        // Dictionary<TileNode, float> gCost = new Dictionary<TileNode, float>();
-        // Dictionary<TileNode, float> fCost = new Dictionary<TileNode, float>();
+        Dictionary<TileNode, float> gCost = new Dictionary<TileNode, float>();
+        Dictionary<TileNode, float> fCost = new Dictionary<TileNode, float>();
 
-        gCost.Clear();
-        fCost.Clear();
-        previousTileMap.Clear();
-        openSet.Clear();
+        // gCost.Clear();
+        // fCost.Clear();
+        // previousTileMap.Clear();
+        // openSet.Clear();
         
         // Keep track of how i got to a tile
-        // Dictionary<TileNode, TileNode> previousTileMap = new Dictionary<TileNode, TileNode>();
+        Dictionary<TileNode, TileNode> previousTileMap = new Dictionary<TileNode, TileNode>();
         // Keep track of what tiles we visit
-        //List<TileNode> openSet = new List<TileNode>();
+        List<TileNode> openSet = new List<TileNode>();
     
         foreach (TileNode tile in grid)
         {

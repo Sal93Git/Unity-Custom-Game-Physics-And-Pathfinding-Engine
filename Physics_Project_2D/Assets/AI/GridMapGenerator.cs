@@ -266,6 +266,7 @@ public class GridMapGenerator : MonoBehaviour
         // }
     }
 
+    //Returns a simple list instead if a 2D array for simple use in other classes where the nodes are needed
     public List<TileNode> getGridNodes()
     {
         List<TileNode> gridNodes = new List<TileNode>();
