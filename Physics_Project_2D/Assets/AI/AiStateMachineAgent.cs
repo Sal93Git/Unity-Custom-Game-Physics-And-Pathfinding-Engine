@@ -20,6 +20,7 @@ public class AiStateMachineAgent : MonoBehaviour
     public TileNode target;
     public int maximumBlobSizeIndex = 0;
 
+    private int currentBlobSizeIndex = 0;
     private List<TileNode> path = new List<TileNode>();
     private Vector2 destination;
     private Coroutine gameCoroutine = null;
@@ -50,7 +51,7 @@ public class AiStateMachineAgent : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Away for user input to begin agent behaviour
+        //A way for user input to begin agent behaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             target = getNewRandomDestination();
@@ -71,14 +72,20 @@ public class AiStateMachineAgent : MonoBehaviour
     // This function clears the currently running state coroutine and takes in a new IEnumerator to start the new coroutine
     void updateStateCoroutine(IEnumerator newState)
     {
-        StopCoroutine(gameCoroutine);
+        if(gameCoroutine!=null)
+        {
+            StopCoroutine(gameCoroutine);
+        }
         gameCoroutine =  StartCoroutine(newState);
     }
 
     // Reset the current tile path
     private void ResetPath()
     {
-        path.Clear();
+        if(path != null)
+        {
+            path.Clear();
+        }
     }
 
     // This function is used to work out which Tile this agent is currently sitting on or is closest to
@@ -115,6 +122,7 @@ public class AiStateMachineAgent : MonoBehaviour
         List<TileNode> tiles = gridGen.getGridNodes();
         bool suitableTileFound = false;
         TileNode currentFoundTile = null;
+        TileNode currentPositionTile = calculateNearestTile();
         if(tiles == null || tiles.Count == 0)
         {
             Debug.Log("could not get a populated list of tiles when calling getNewRandomDestination() on AiStateMachineAgent");
@@ -125,10 +133,16 @@ public class AiStateMachineAgent : MonoBehaviour
             ResetPath();
             int randomTileIndex = Random.Range(0,tiles.Count-1);
             currentFoundTile = tiles[randomTileIndex];
+           // try
+           // {
+                path = astar1.FindShortestPath(gridGen.grid,calculateNearestTile(), currentFoundTile);
+            //}
+            //catch (System.Exception e)
+           // {
+             //   Debug.Log(e+"; Path was null, trying again");
+            //}
 
-            path = astar1.FindShortestPath(gridGen.grid,calculateNearestTile(), currentFoundTile);
-
-            if((path != null)&&(currentFoundTile.type != TileType.Obstacle))
+            if((path != null)&&(currentFoundTile.type != TileType.Obstacle) && currentFoundTile!=currentPositionTile)
             {
                 suitableTileFound = true;
             }
@@ -185,7 +199,7 @@ public class AiStateMachineAgent : MonoBehaviour
             }
         }
         transform.localScale = new Vector3(originalScaleX*1.25f,originalScaleY*1.25f, transform.localScale.z);
-        maximumBlobSizeIndex++;
+        currentBlobSizeIndex++;
 	}
 
     // This coroutine simulates the blob dying and then destroys/kills the blob game object
@@ -224,7 +238,7 @@ public class AiStateMachineAgent : MonoBehaviour
     // is it time for agent blob to die
     bool lifeExpectancyReached()
     {
-        if(maximumBlobSizeIndex >= 2 && (currentState != AgentState.Die))
+        if(currentBlobSizeIndex >= maximumBlobSizeIndex && (currentState != AgentState.Die))
         {
             return true;
         }

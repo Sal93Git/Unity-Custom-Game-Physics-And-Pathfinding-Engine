@@ -259,7 +259,7 @@ MonoBehaviour:
   currentState: 1
   speed: 1
   target: {fileID: 0}
-  maximumBlobSizeIndex: 0
+  maximumBlobSizeIndex: 3
 --- !u!212 &552823024
 SpriteRenderer:
   m_ObjectHideFlags: 0
