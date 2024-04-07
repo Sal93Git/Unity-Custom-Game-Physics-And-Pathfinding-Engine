@@ -78,12 +78,10 @@ sysinfo.txt
 
 # Ignore files with .shader and .cginc extensions and prevent Linguist from detecting them as code
 # Ignore files with .shader extension and prevent Linguist from detecting them as code
-Physics_Project_2D/*.shader linguist-detectable=false
-Physics_Project_2D/*.shaders linguist-detectable=false
+*.shader linguist-detectable=false
+*.shaders linguist-detectable=false
 # Ignore files with .cginc extension and prevent Linguist from detecting them as code
-Physics_Project_2D/*.cginc linguist-detectable=false
-
-
+*.cginc linguist-detectable=false
 
 # Add other ignore patterns below as needed
 
