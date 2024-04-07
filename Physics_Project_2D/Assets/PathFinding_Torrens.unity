@@ -190,6 +190,7 @@ GameObject:
   m_Component:
   - component: {fileID: 131128768}
   - component: {fileID: 131128767}
+  - component: {fileID: 131128769}
   m_Layer: 0
   m_Name: GC_Monitor
   m_TagString: Untagged
@@ -224,6 +225,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &131128769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 131128766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 577b27b5bc0fa2641930ae195b638558, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetFrameRate: 60
 --- !u!1 &552823022
 GameObject:
   m_ObjectHideFlags: 0
