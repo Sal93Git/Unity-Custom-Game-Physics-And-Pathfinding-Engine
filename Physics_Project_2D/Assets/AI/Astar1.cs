@@ -56,7 +56,7 @@ public class Astar1 : MonoBehaviour
             }
 
             // The GetNeighbours function has been amended to take into account all surrounding traversable tiles including diagonal tiles.
-            foreach (TileNode neighbourTile in currentTile.GetNeighbours(grid))
+            foreach (TileNode neighbourTile in currentTile.GetNeighbours_())
             {
                 /* 
                 Here i have made changes to take into account the tile weights(a value to represent terrain difficulty)
