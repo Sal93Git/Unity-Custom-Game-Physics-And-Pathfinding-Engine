@@ -1,0 +1,2 @@
+# Exclude ShaderLab files from language stats
+*.shader linguist-vendored
